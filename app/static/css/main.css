@@ -1,0 +1,78 @@
+
+body, button {
+    font-family: 'Raleway', sans-serif;
+}
+
+header {
+    width: 100%;
+    background: #F4F4F4;
+}
+
+.header {
+    height: 8em;
+    width: 80%;
+    margin: 0 auto;
+    padding: 3em 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#search input {
+    width: 30em;
+}
+
+#auth span {
+    margin-right: 1em;
+    color: #9656A1;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#auth button {
+    color: #9656A1;
+    font-size: 1em;
+    font-weight: bold;
+    width: 10em;
+}
+
+#navbar nav {
+    background: #9656A1;
+}
+
+#navbar nav ul {
+    /* width: 80%; */
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#navbar nav ul li {
+    text-align: center;
+    width: 25%;
+    padding: 0.6em 0;
+    border-width: 1px;
+    border-color: black;
+}
+#navbar nav ul li:hover {
+    background:#7b4785;
+
+}
+
+#navbar nav ul li a {
+    color:#F4F4F4;
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    padding: 1em;
+    font-size: 0.8em;
+    position: fixed;
+    bottom: 0;
+    color: rgb(87, 87, 87);
+    background: #F4F4F4;
+    text-align: center;
+}
