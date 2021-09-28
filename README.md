@@ -16,8 +16,4 @@ A partir deste ponto os passos não dependem do sistema operacional:
 * flask db upgrade
 * flask run
 
-
-Uso:
-* source env/bin/activate  (Caso ainda não esteja ativo)
-* python run.py
 * abrir no navegador a url http://localhost:5000
