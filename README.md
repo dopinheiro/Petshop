@@ -10,6 +10,7 @@ Windows (Powershell):
 * ./env.ps1
 
 A partir deste ponto os passos não dependem do sistema operacional:
+Este trecho é executado apenas na instalação
 * pip install -r requirements.txt
 * flask db init
 * flask db migrate
