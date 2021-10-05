@@ -20,31 +20,33 @@
     <header>
         <div class="header">
             <h1>
-                <img src="../static/image/logo.png" alt="Petshop" />
+                <img src="../static/image/logopet.png" alt="Petshop" id="logo" />
             </h1>
-            <div id="search">
-                <input type="text" placeholder="O que seu pet precisa?">
+
+            <div id="navbar">
+                <nav>
+                    <ul>
+                      <li><a href="#">Início</a></li>
+                      <li><a href="#">Serviços</a></li>
+                      <li><a href="#">Agenda</a></li>
+                      <li><a href="#">Pets</a></li>
+                      <li><a href="#">Contato</a></li>
+                    </ul>
+                  </nav>
             </div>
+
             <div id="auth">
                 <span id="signin">Cadastre-se</span>
                 <button id="login">ENTRAR</button>
             </div>
-        </div>
-        <div id="navbar">
-            <nav>
-                <ul>
-                  <li><a href="#">Serviços</a></li>
-                  <li><a href="#">Utilitários</a></li>
-                  <li><a href="#">Sobre</a></li>
-                  <li><a href="#">Contato</a></li>
-                </ul>
-              </nav>
-              
+
         </div>
     </header>
     {% block content %}{% endblock %}
     <footer>
-        <span>Todos direitos reservados.</span>
+        <span> 
+            <p>© 2021 - Todos os direitos reservados</p>
+        </span>
     </footer>
 </body>
 </html>
