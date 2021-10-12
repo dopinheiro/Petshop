@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <ul class="servicos">
+        <li>
+            <div class="card-content">
+                <img src="../image/banho.png">
+                <h2>Banho</h2>
+            </div>
+        </li>
+        <li>
+            <div class="card-content"></div>
+                <img src="../image/hidratacao.png">
+                <h2>Hidratação</h2>
+            </div>
+        </li>
+        <li>
+            <div class="card-content"></div>
+                <img src="../image/penteados.png">
+                <h2>Penteados</h2>
+            </div>
+        </li>
+        <li>
+            <div class="card-content"></div>
+                <img src="../image/tosa.png">
+                <h2>Tosa</h2>
+            </div>
+        </li>
+        <li>
+            <div class="card-content"></div>
+                <img src="../image/escovacao.png">
+                <h2>Escovação de dentes</h2>
+            </div>
+        </li>
+        <li>
+            <div class="card-content"></div>
+                <img src="../image/corte.png">
+                <h2>Corte de unhas</h2>
+            </div>
+        </li>
+        
+    </ul>
+    <div class="botoes">
+        <button class="agendamentos" type="submit" onsubmit="">Meus agendamentos <i class="far fa-calendar-alt"></i></button>   
+        <button class="agendamentos" type="submit" onsubmit=""> Novo agendamento <i class="fas fa-plus"></i></button>  
+    </div>
+    
+</main>
+
+{% endblock %}
