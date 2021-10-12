@@ -1,0 +1,51 @@
+/** HOME PAGE **/
+
+.container-home {
+    margin: 7% 7%;
+    font-weight: lighter;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+section p {
+    font-size: 36px;
+    width: 390px;
+    color: #4A403A;
+}
+
+section img, p {
+    display: inline-block;
+    align-items: center;
+}
+
+.servicos {
+    width: 350px;
+}
+
+
+.imagem-servicos {
+    width: 480px;
+    height: 340px;
+}
+
+.encontrar-servico {
+    margin-top: 1em;
+    padding: 0.5em;
+    font-size: 0.9em;
+    color:#EFEFEF;
+    font-weight: bold;
+    background: #A45D5D;
+    border-radius: 5px;
+    border: none;
+}
+
+.encontrar-servico:hover {
+    background-color: #b67575;
+    color: #ffffff;
+} 
+
+.encontrar-servico i {
+    padding-left: 0.5em;
+    font-size: 1em;
+}

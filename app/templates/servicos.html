@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/servicos.css') }}">
+{% endblock %}
+
+{% block content %}
+<ul class="servicos">
+    {% for service in services %}
+    <li>
+        <div class="card-content">
+            <img src="{{ url_for('static', filename='image/'+ service.icon + '.png')}}">
+            <h2>{{service.name}}</h2>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<div class="botoes">
+    <button class="agendamentos" type="submit" onsubmit="">Meus agendamentos <i class="far fa-calendar-alt"></i></button>   
+    <button class="agendamentos" type="submit" onclick="location.href = '/appointments';"> Novo agendamento <i class="fas fa-plus"></i></button>  
+</div>
+
+{% endblock %}

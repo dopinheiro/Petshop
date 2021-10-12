@@ -5,11 +5,13 @@ class Services(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    duration = db.Column(db.String)
-    price = db.Column(db.String)
+    duration = db.Column(db.Integer)
+    price = db.Column(db.Float)
+    icon = db.Column(db.String)
     
-    def __init__(self, name, duration, price):
+    def __init__(self, name, duration, price, icon):
         self.name = name
         self.duration = duration
         self.price = price
+        self.icon = icon
         

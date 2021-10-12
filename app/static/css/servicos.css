@@ -1,0 +1,60 @@
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+	flex-direction: column;
+}
+.servicos {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+.servicos li {
+	height: 12em;
+	width: 10em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border: none;
+    background-color: #FFC069;
+	border-radius: 5px;
+}
+
+.servicos li:hover {
+	border: 2px solid  #A45D5D;
+}
+
+
+.servicos h2 {
+    padding: 1em 1em 0 1em;
+	font-size: 20px;
+	font-weight: bold;
+    color: #55423D;
+}
+
+.agendamentos {
+	margin: 3.3em;
+    width: 15em;
+    height: 2.5em;
+    color:#EFEFEF;
+    font-weight: bold;
+    background: #A45D5D;
+    border-radius: 5px;
+    border: none;
+}
+
+.agendamentos:hover {
+	background-color: #b67575;
+    color: #ffffff;
+}
+
+.agendamentos i {
+	padding-left: 0.5em;
+	font-size: 1em;
+}
+
