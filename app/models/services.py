@@ -5,8 +5,8 @@ class Services(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    duration = db.Column(db.String)
-    price = db.Column(db.String)
+    duration = db.Column(db.Integer)
+    price = db.Column(db.Float)
     
     def __init__(self, name, duration, price):
         self.name = name

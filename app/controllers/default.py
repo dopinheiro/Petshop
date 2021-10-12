@@ -1,7 +1,11 @@
+from datetime import datetime
+
 from app import app,db
-from flask import request
-from flask import render_template
+from flask import render_template,request
 from app.models.clients import Clients
+from app.models.pets import Pets
+from app.models.services import Services
+from app.models.appointments import Appointments
 
 @app.route('/')
 def index():
@@ -36,3 +40,63 @@ def register():
         else:
             return 'Email de usuário já cadastrado'
     return 'Tela novo usuário'
+
+@app.route('/add-pet', methods=['GET', 'POST'])
+def add_pet():
+    if request.method == 'POST':
+        name = request.form['name']
+        breed = request.form['breed']
+        proprietary = request.form['proprietary']
+        obs = request.form['obs']
+        
+        is_register = len(Pets.query.filter_by(name=name).all())
+        if not is_register:
+            new_pet = Pets(name, breed, proprietary, obs)
+            db.session.add(new_pet)
+            db.session.commit()
+            return 'Pet adicionado com sucesso'
+        else:
+            return 'Erro'
+    return 'Tela novo pet'
+
+@app.route('/remove-pet', methods=['GET', 'DELETE'])
+def remove_pet():
+    if request.method == 'DELETE':
+        pet_id = request.form['pet_id']
+        proprietary = request.form['proprietary_id']
+        pet = Pets.query.filter_by(id=pet_id).all()
+        print(pet)
+        if pet and pet[0].proprietary == int(proprietary):
+            db.session.delete(pet[0])
+            db.session.commit()
+            return 'Pet removido com sucesso'
+        elif not pet:
+            return 'Erro, não cadastrado'
+        else:
+            return 'Erro, este pet não é seu'
+    return 'Tela remover pet'
+
+@app.route('/add-services', methods=['GET', 'POST'])
+def add_services():
+    if request.method == 'POST':
+        name = request.form['name']
+        duration = request.form['duration']
+        price = request.form['price']
+        
+        new_service = Services(name, duration, price)
+        db.session.add(new_service)
+        db.session.commit()
+        return 'Serviço adicionado com sucesso'
+    return 'Tela Adicionar serviços'
+
+@app.route('/appointments', methods=['GET', 'POST'])
+def add_appointment():
+    if request.method == 'POST':
+        date = datetime.strptime(request.form['date'], '%d/%m/%Y %H:%M').date()
+        pet = request.form['pet']
+        service = request.form['service']
+        
+        new_appointment = Appointments(date, pet, service)
+        db.session.add(new_appointment)
+        db.session.commit()
+        return 'Serviço adicionado com sucesso'
