@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from app import app,db
-from flask import render_template,request
+from flask import render_template,request, flash, redirect, url_for
 from app.models.clients import Clients
 from app.models.pets import Pets
 from app.models.services import Services
@@ -9,7 +9,7 @@ from app.models.appointments import Appointments
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
 
 @app.route('/auth')
 def authentication():
@@ -29,17 +29,17 @@ def register():
         email = request.form['email']
         password = request.form['password']  # TODO: usar hash para senha, usar werkzeug
         phone = request.form['phone']
-        address = request.form['address']
-        
+        address = request.form['address'] if 'address' in request.form else None
         is_register = len(Clients.query.filter_by(email=email).all())
         if not is_register:
             new_user = Clients(name, email, password, phone, address)
             db.session.add(new_user)
             db.session.commit()
-            return 'Usuário adicionado com sucesso'
+            flash('Usuário cadastrado com sucesso, você será redirecionado', 'success')
+            return redirect(url_for('add_appointment'))
         else:
-            return 'Email de usuário já cadastrado'
-    return 'Tela novo usuário'
+            flash('Email de usuário já cadastrado', 'error')
+    return render_template('cadastro.html')
 
 @app.route('/add-pet', methods=['GET', 'POST'])
 def add_pet():
@@ -76,18 +76,20 @@ def remove_pet():
             return 'Erro, este pet não é seu'
     return 'Tela remover pet'
 
-@app.route('/add-services', methods=['GET', 'POST'])
+@app.route('/services', methods=['GET', 'POST'])
 def add_services():
     if request.method == 'POST':
         name = request.form['name']
         duration = request.form['duration']
         price = request.form['price']
+        icon = request.form['icon']
         
-        new_service = Services(name, duration, price)
+        new_service = Services(name, duration, price, icon)
         db.session.add(new_service)
         db.session.commit()
         return 'Serviço adicionado com sucesso'
-    return 'Tela Adicionar serviços'
+    services = Services.query.all()
+    return render_template('servicos.html', services=services)
 
 @app.route('/appointments', methods=['GET', 'POST'])
 def add_appointment():
@@ -100,3 +102,5 @@ def add_appointment():
         db.session.add(new_appointment)
         db.session.commit()
         return 'Serviço adicionado com sucesso'
+    services = Services.query.all()
+    return render_template('addagendamento.html', services=services)

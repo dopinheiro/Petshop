@@ -1,46 +1,54 @@
 {% extends "base.html" %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+{% endblock %}
+
 {% block content %}
-
-<main>
-    <div class="container-form">
-        <form action="">
-
-            <div class="campo-img">
-                <img src="../image/logo1.png" alt="" class="logo1">
-            </div>
-
-            <div class="campo">
-                <label for="">Nome completo</label> <br>
-                <input type="text" name="name" placeholder="Insira seu nome completo" id="name" required>
-            </div>
-
-            <div class="campo">
-                <label for="">E-mail</label> <br>
-                <input type="email" name="email" placeholder="seuemail@mail.com" id="email" required>
-            </div>
-
-            <div class="campo">
-                <label for="">Celular</label> <br>
-                <input type="tel" name="celular" placeholder="(xx) xxxxx-xxxx" id="celular" required>
-            </div>
-
-            <div class="campo">
-                <label for="">Senha</label> <br>
-                <input type="password" name="password" placeholder="********" id="password" required>
-            </div>
-
-            <div class="campo">
-                <label for="">Repetir senha</label> <br>
-                <input type="password" name="password" placeholder="********" id="password2" required>
-            </div>
-            
-            <button class="cadastrar" type="submit" onsubmit="">CADASTRAR</button>    
-            
-
-        </form>
-    </div>
-</main>
-
-
+{% with messages =  get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == 'error' %}
+                        <div class="alert alert-dismissible alert-danger">
+                        {% elif category == 'warning' %}
+                        <div class="alert alert-dismissible alert-warning">
+                        {% elif category == 'success' %}
+                        <div class="alert alert-dismissible alert-success">
+                        {% else %}
+                        <div class="alert alert-dismissible alert-primary">
+                        {% endif %}
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+<div class="container-form">
+    <form action="/register" method="POST">
+        <div class="campo-img">
+            <img src="{{ url_for('static', filename='image/logo1.png') }}" alt="" class="logo1">
+        </div>
+        <div class="campo">
+            <label for="">Nome completo</label> <br>
+            <input type="text" name="name" placeholder="Insira seu nome completo" id="name" required>
+        </div>
+        <div class="campo">
+            <label for="">E-mail</label> <br>
+            <input type="email" name="email" placeholder="seuemail@mail.com" id="email" required>
+        </div>
+        <div class="campo">
+            <label for="">Celular</label> <br>
+            <input type="tel" name="phone" placeholder="(xx) xxxxx-xxxx" id="celular" required>
+        </div>
+        <div class="campo">
+            <label for="">Senha</label> <br>
+            <input type="password" name="password" placeholder="********" id="password" required>
+        </div>
+        <div class="campo">
+            <label for="">Repetir senha</label> <br>
+            <input type="password" name="password" placeholder="********" id="password2" required>
+        </div>
+        <button class="cadastrar" type="submit" onsubmit="">CADASTRAR</button>    
+    </form>
+</div>
 {% endblock %}
