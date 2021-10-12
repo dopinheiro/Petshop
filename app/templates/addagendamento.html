@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <div class="container-form">
+        <form action="post">
+
+            <h2>Agendamento</h2>
+
+            <div class="campo">
+                <label for="" class="checkbox">Data</label> <br>
+                <input type="date" id="date" class="data-hora" required>
+            </div>
+
+            <div class="campo">
+                <label for="">Horário</label> <br>
+                <input type="time" id="horario" class="data-hora" required>
+            </div>
+
+            <div class="check">
+                <label for="">Serviços
+                </label> <br>
+
+                <label for="servico" class="check-servico"> 
+                    <input type="checkbox"> Banho
+                </label><br>
+                <label for="servico" class="check-servico"> 
+                    <input type="checkbox"> Hidratação
+                </label><br>
+                <label for="servico" class="check-servico"> 
+                    <input type="checkbox"> Penteado
+                </label><br>
+                <label for="servico " class="check-servico">  
+                    <input type="checkbox"> Tosa
+                </label><br>
+                <label for="servico" class="check-servico">  
+                    <input type="checkbox"> Escovação de dentes
+                </label><br>
+                <label for="servico" class="check-servico"> 
+                    <input type="checkbox"> Corte de unhas
+                </label><br>
+            </div>
+
+            <div class="campo">
+                <label for="">Observação</label> <br>
+                <input type="text" name="observacao" class="observacao" placeholder="Insira sua observacao" equired>
+            </div>
+
+            <button class="agendar" type="submit" onsubmit="">AGENDAR</button>    
+            
+
+        </form>
+    </div>
+</main>
+
+{% endblock %}

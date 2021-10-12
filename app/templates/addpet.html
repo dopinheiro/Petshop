@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <div class="container-form">
+        <form action="post">
+
+            <h2>Adicionar pet</h2>
+
+            <div class="pet-image">
+                <label class="label">
+                  <input type="file" />
+                  <figure class="pet-figure">
+                    <img src="../image/addpet.png" class="pet-avatar" alt="avatar">
+                    <figcaption class="pet-figcaption">
+                      <img src="../image/camera-white.png">
+                    </figcaption>
+                  </figure>
+                </label>
+            </div>
+
+            <div class="campo">
+                <label for="">Nome</label> <br>
+                <input type="text" name="name-pet" placeholder="Insira o nome do seu pet" id="name-pet" required>
+            </div>
+
+            <div class="campo">  
+                <label for="especie">Espécie </label>
+                <select name="especie" id="especie">
+                    <option value="selecionar" aria-checked="true">Selecionar</option>
+                    <option value="cachorro">Cachorro</option>
+                    <option value="gato">Gato</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="" class="checkbox">Data de nascimento</label> <br>
+                <input type="date" id="date" class="data-hora" required>
+            </div>
+
+            <div class="campo"> 
+                <label for="genero">Gênero</label>
+                <select name="genero" id="genero">
+                    <option value="selecionar" aria-checked="true"> Selecionar</option>
+                    <option value="femea">Fêmea</option>
+                    <option value="macho">Macho</option>
+                </select>
+
+            </div>
+
+            <div class="switch-campo">
+                <label for="switch-shadow">Castrado</label>
+                <input id="switch-shadow" class="switch switch--shadow" type="checkbox"/>
+                <label for="switch-shadow"></label>
+            </div>
+
+            
+            <button class="agendar" type="submit" onsubmit="">Adicionar pet</button>    
+            
+
+        </form>
+    </div>
+</main>
+
+{% endblock %}
