@@ -5,8 +5,10 @@ class Appointments(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
-    pet = db.Column(db.Integer, db.ForeignKey('pets.id'))
-    service = db.Column(db.Integer, db.ForeignKey('services.id'))
+    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
+    pet = db.relationship('Pets', foreign_keys=pet_id)
+    service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
+    service = db.relationship('Services', foreign_keys=service_id)
     finished_at = db.Column(db.Date)
     obs = db.Column(db.String)
     

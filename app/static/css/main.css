@@ -37,10 +37,16 @@ nav a {
 }
 
 
-#signin {
+#user-name {
+  padding: 1em;
+  font-size: 10px;
+}
+
+#user-name, #signin {
     color: #A45D5D;
     font-weight: bold;
 }
+
 
 #login {
     padding: 0.5em;
@@ -71,6 +77,11 @@ footer {
     position: fixed;
     bottom: 0;
     text-align: center;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
 }
 
 .auth i {

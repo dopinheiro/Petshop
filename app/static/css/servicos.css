@@ -13,7 +13,7 @@ main {
 	align-items: center;
 }
 .servicos li {
-	height: 12em;
+	height: 11em;
 	width: 10em;
 	display: flex;
 	flex-direction: column;
