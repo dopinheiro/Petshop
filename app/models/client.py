@@ -1,7 +1,7 @@
 from app import db, login_manager
 from flask_login import UserMixin
 
-class Clients(UserMixin, db.Model):
+class Client(UserMixin, db.Model):
     __tablename__ = 'clients'
 
     id = db.Column(db.Integer, primary_key=True)

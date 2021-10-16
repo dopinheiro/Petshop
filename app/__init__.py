@@ -14,14 +14,15 @@ migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 
 from app.controllers import default
-from app.models import services
-from app.models import clients
-from app.models import appointments
-from app.models import pets
-from app.models import species
+from app.models import service
+from app.models import client
+from app.models import appointment
+from app.models import appointment_service
+from app.models import pet
+from app.models import specie
 
 
 @login_manager.user_loader
 def load_user(user_id):
     print(user_id)
-    return clients.Clients.query.get(int(user_id))
+    return client.Client.query.get(int(user_id))
