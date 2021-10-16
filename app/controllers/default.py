@@ -4,23 +4,43 @@ from app import app,db
 from flask import render_template,request, flash, redirect, url_for
 from app.models.clients import Clients
 from app.models.pets import Pets
+from app.models.species import Species
 from app.models.services import Services
 from app.models.appointments import Appointments
+from flask_login import login_user, login_required, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/')
 def index():
     return render_template('home.html')
 
-@app.route('/auth')
-def authentication():
-    return 'Authentication'
-
-@app.route('/teste')
-def teste():
-    usuario = Clients('Usuario', 'novo.usuario@gmail.com', '12345678', '11987654321', 'Rua desconhecida')
-    db.session.add(usuario)
-    db.session.commit()
-    return 'usuário adicionado'
+@app.route('/config')
+def config():
+    if len(Clients.query.all())==0 and len(Services.query.all())==0:
+        queries = [
+            Clients(
+                'Diego de Oliveira',
+                'diego.olliveirap@gmail.com',
+                generate_password_hash('123456'),
+                '11961858580',
+                None
+            ),
+            Species('Cachorro'),
+            Species('Gato'),
+            Pets('Maya', 1, 1, None),
+            Services('Banho', 30, 60, 'banho'),
+            Services('Tosa', 30, 60, 'tosa'),
+            Services('Corte de unhas', 30, 60, 'corte'),
+            Services('Hidratação', 30, 60, 'hidratacao'),
+            Services('Penteado', 30, 60, 'penteados'),
+            Services('Escovação dos dentes ', 30, 60, 'escovacao'),
+        ]
+        for query in queries:
+            db.session.add(query)
+        db.session.commit()
+        return 'configurado'
+    else:
+        return 'Não necessita configuração'
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -32,14 +52,38 @@ def register():
         address = request.form['address'] if 'address' in request.form else None
         is_register = len(Clients.query.filter_by(email=email).all())
         if not is_register:
-            new_user = Clients(name, email, password, phone, address)
+            hashed_password = generate_password_hash(password)
+            new_user = Clients(name, email, hashed_password, phone, address)
             db.session.add(new_user)
             db.session.commit()
             flash('Usuário cadastrado com sucesso, você será redirecionado', 'success')
-            return redirect(url_for('add_appointment'))
+            return redirect(url_for('login'))
         else:
             flash('Email de usuário já cadastrado', 'error')
     return render_template('cadastro.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = Clients.query.filter_by(email=email).first()
+
+        if user and check_password_hash(user.password,password):
+            login_user(user)
+            return redirect(url_for('add_appointment'))
+    return render_template('login.html')
+
+
+@app.route('/get-pet', methods=['GET', 'POST'])
+def get_pet():
+    pet_id = request.args.get('id')
+    pet = Pets.query.filter_by(id=pet_id).first()
+    if pet:
+        return f'O/A {pet.species.description} chamado/a {pet.name} pertence à {pet.proprietary.name}'
+    else:
+        return 'Nenhum dado encontrado'
 
 @app.route('/add-pet', methods=['GET', 'POST'])
 def add_pet():
@@ -89,9 +133,12 @@ def add_services():
         db.session.commit()
         return 'Serviço adicionado com sucesso'
     services = Services.query.all()
+    
+    print(services[0].icon)
     return render_template('servicos.html', services=services)
 
 @app.route('/appointments', methods=['GET', 'POST'])
+@login_required
 def add_appointment():
     if request.method == 'POST':
         date = datetime.strptime(request.form['date'], '%d/%m/%Y %H:%M').date()
@@ -104,3 +151,4 @@ def add_appointment():
         return 'Serviço adicionado com sucesso'
     services = Services.query.all()
     return render_template('addagendamento.html', services=services)
+

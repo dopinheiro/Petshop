@@ -39,8 +39,14 @@
             </nav>
                 
             <div class="auth">
+            {% if current_user.is_authenticated %}
+                <img src="{{ url_for('static', filename='image/user.png') }}">
+                <span id="user-name">{{ current_user.name }}</span></a>
+            {% else %}
                 <a href="/register"><span id="signin">Cadastre-se</span></a>
-                <button type="button" id="login"> <i class="fas fa-sign-in-alt"></i>ENTRAR </button>
+                <button type="button" id="login" onclick="location.href = '/login';" > <i class="fas fa-sign-in-alt"></i>ENTRAR </button>
+            {% endif %}
+
             </div>
 
         </div>
