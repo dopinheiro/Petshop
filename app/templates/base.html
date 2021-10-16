@@ -5,44 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="../static/image/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.png') }}" type="image/x-icon">
 
-    <link rel="stylesheet" href="../static/css/reset.css">
-    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.css') }}">
+    {% block css %}
+    {% endblock %}
     <title>Petshop</title>
 </head>
 <body>
     <header>
         <div class="header">
-            <h1>
-                <img src="../static/image/logopet.png" alt="Petshop" id="logo" />
-            </h1>
+            
+            <img src="../static/image/logo.png" alt="">
 
-            <div id="navbar">
-                <nav>
-                    <ul>
-                      <li><a href="#">Início</a></li>
-                      <li><a href="#">Serviços</a></li>
-                      <li><a href="#">Agenda</a></li>
-                      <li><a href="#">Pets</a></li>
-                      <li><a href="#">Contato</a></li>
-                    </ul>
-                  </nav>
-            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/services">Serviços</a></li>
+                    <li><a href="/appointments">Agenda</a></li>
+                    <li><a href="#">Pets</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+                
+            <div class="auth">
+            {% if current_user.is_authenticated %}
+                <img src="{{ url_for('static', filename='image/user.png') }}">
+                <span id="user-name">{{ current_user.name }}</span></a>
+            {% else %}
+                <a href="/register"><span id="signin">Cadastre-se</span></a>
+                <button type="button" id="login" onclick="location.href = '/login';" > <i class="fas fa-sign-in-alt"></i>ENTRAR </button>
+            {% endif %}
 
-            <div id="auth">
-                <span id="signin">Cadastre-se</span>
-                <button id="login">ENTRAR</button>
             </div>
 
         </div>
     </header>
-    {% block content %}{% endblock %}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
     <footer>
         <span> 
             <p>© 2021 - Todos os direitos reservados</p>

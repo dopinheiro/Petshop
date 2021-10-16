@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="container-home">
+    <div class="servicos">
+        <p class="texto-serviços">Serviços de <b>alta qualidade</b> para seu pet</p>
+        <button onclick="location.href = '/services';" class="encontrar-servico">Encontrar Serviço <i class="fas fa-briefcase"></i></button>
+    </div>
+    <img src="{{ url_for('static', filename='image/service.png') }}" alt="" class="imagem-servicos">
+</section>
+{% endblock %}
