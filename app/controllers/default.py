@@ -152,3 +152,6 @@ def add_appointment():
     services = Services.query.all()
     return render_template('addagendamento.html', services=services)
 
+@app.route('/contact')
+def contato():
+    return render_template('contato.html')
