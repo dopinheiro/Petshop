@@ -7,16 +7,12 @@ class Appointments(db.Model):
     date = db.Column(db.Date)
     pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
     pet = db.relationship('Pets', foreign_keys=pet_id)
-    service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
-    service = db.relationship('Services', foreign_keys=service_id)
     finished_at = db.Column(db.Date)
     obs = db.Column(db.String)
+    services = db.relationship('Services', secondary='appointments_services', backref='appointments')
     
-    def __init__(self, date, pet, service, finished_at=None, obs=None):
+    def __init__(self, date, pet, finished_at=None, obs=None):
         self.date = date
-        self.pet = pet
-        self.service = service
+        self.pet_id = pet
         self.finished_at = finished_at
         self.obs = obs
-
-        
