@@ -7,6 +7,7 @@ from app.models.pets import Pets
 from app.models.species import Species
 from app.models.services import Services
 from app.models.appointments import Appointments
+from app.models.appointment_service import AppointmentSevice
 from flask_login import login_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -41,6 +42,7 @@ def config():
         return 'configurado'
     else:
         return 'Não necessita configuração'
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -133,22 +135,40 @@ def add_services():
         db.session.commit()
         return 'Serviço adicionado com sucesso'
     services = Services.query.all()
-    
-    print(services[0].icon)
     return render_template('servicos.html', services=services)
 
 @app.route('/appointments', methods=['GET', 'POST'])
 @login_required
 def add_appointment():
     if request.method == 'POST':
-        date = datetime.strptime(request.form['date'], '%d/%m/%Y %H:%M').date()
-        pet = request.form['pet']
-        service = request.form['service']
+        full_date = f"{request.form['date']} {request.form['horario']}"
+        date = datetime.strptime(full_date, '%Y-%m-%d %H:%M')
+        # pet_id = request.form['pet']  # TODO: Precisa inserir no formulário
+        services = []
+        note = request.form['note']
         
-        new_appointment = Appointments(date, pet, service)
+        new_appointment = Appointments(date, 1, obs=note)
         db.session.add(new_appointment)
+        db.session.flush()
+
+        for key in request.form.keys():
+            if key.startswith('service'):
+                service = int(request.form[key])
+                new_appointment_service = AppointmentSevice(new_appointment.id, service)
+                db.session.add(new_appointment_service)
+                
         db.session.commit()
         return 'Serviço adicionado com sucesso'
     services = Services.query.all()
     return render_template('addagendamento.html', services=services)
 
+
+@app.route('/get-appointments', methods=['GET', 'POST'])
+def get_appointments():
+    appointment_id = request.args.get('id')
+    appointment = Appointments.query.filter_by(id=appointment_id).first()
+    if appointment:
+        services = [ service.name for service in appointment.services]
+        return f'''O agendamento possui os seguintes serviços: {str(services).replace("[", "").replace("]", "").replace("'", "")}'''
+    else:
+        return 'Nenhum dado encontrado'

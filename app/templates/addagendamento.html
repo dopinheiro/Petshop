@@ -6,29 +6,29 @@
 
 {% block content %}
     <div class="container-form">
-        <form action="post">
+        <form action="/appointments" method="POST">
 
             <h2>Agendamento</h2>
             <div class="campo">
-                <label for="" class="checkbox">Data</label> <br>
-                <input type="date" id="date" class="data-hora" required>
+                <label for="date" class="checkbox">Data</label> <br>
+                <input type="date" name="date" class="data-hora" required>
             </div>
             <div class="campo">
-                <label for="">Horário</label> <br>
-                <input type="time" id="horario" class="data-hora" required>
+                <label for="horario">Horário</label> <br>
+                <input type="time" name="horario" class="data-hora" required>
             </div>
             <div class="check">
                 <label for="">Serviços
                 </label> <br>
                 {% for service in services %}
-                <label for="servico" class="check-servico"> 
-                    <input type="checkbox" value="{{ service.id }}"> {{ service.name }}
+                <label for="service" class="check-servico"> 
+                    <input type="checkbox" name="service-{{service.id}}" value="{{ service.id }}"> {{ service.name }}
                 </label><br>
                 {% endfor %}
             </div>
             <div class="campo">
                 <label for="">Observação</label> <br>
-                <input type="text" name="observacao" class="observacao" placeholder="Insira sua observacao" equired>
+                <input type="text" name="note" class="observacao" placeholder="Insira sua observacao" equired>
             </div>
             <button class="agendar" type="submit" onsubmit="">AGENDAR</button>    
         </form>
