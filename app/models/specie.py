@@ -1,6 +1,6 @@
 from app import db
 
-class Species(db.Model):
+class Specie(db.Model):
     __tablename__ = 'species'
 
     id = db.Column(db.Integer, primary_key=True)
