@@ -1,39 +1,3 @@
-.container-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2%;
-}
-
-form {
-    color: #4A403A;
-    padding: 1em;
-    width: 280px;
-    height: 80%;
-    background: #FFFFFF;
-    border: 1px solid #A45D5D;
-    border-radius: 5px;
-}
-
-form h2 {
-    color: #4A403A;
-    font-size: 1em;
-    text-align: center;
-    margin-bottom: 1em;
-}
-
-.data-hora {
-    padding: 0.5em;
-    background: rgba(255, 192, 105, 0.1);
-    border: 1px solid #A45D5D;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 5px;
-    width: 100%;
-    height: 30px;
-    margin-bottom: 1em;
-    margin-top: 2px;  
-}
-
 .check {
     margin-bottom: 1em;
     margin-top: 2px;  
@@ -47,11 +11,6 @@ form h2 {
 
 .observacao {
     padding-left: 1em;
-    background: rgba(255, 192, 105, 0.1);
-    border: 1px solid #A45D5D;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 5px;
-    width: 100%;
     height: 60px;
     margin-bottom: 1em;
 }

@@ -103,7 +103,7 @@ def add_pet():
             return 'Pet adicionado com sucesso'
         else:
             return 'Erro'
-    return 'Tela novo pet'
+    return render_template('addpet.html')
 
 @app.route('/remove-pet', methods=['GET', 'DELETE'])
 def remove_pet():
