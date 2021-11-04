@@ -1,5 +1,6 @@
 from app import db, login_manager
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -15,7 +16,7 @@ class User(UserMixin, db.Model):
     def __init__(self, name, email, password, phone, role):
         self.name = name
         self.email = email
-        self.password = password
+        self.password = generate_password_hash(password)
         self.phone = phone
         self.role_id = role
 

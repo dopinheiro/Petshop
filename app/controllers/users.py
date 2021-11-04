@@ -16,8 +16,7 @@ def register():
         is_register = len(User.query.filter_by(email=email).all())
 
         if not is_register:
-            hashed_password = generate_password_hash(password)
-            new_user = User(name, email, hashed_password, phone, role)
+            new_user = User(name, email, password, phone, role)
             db.session.add(new_user)
             db.session.commit()
             flash('Usuário cadastrado com sucesso, você será redirecionado', 'success')

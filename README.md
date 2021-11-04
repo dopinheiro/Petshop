@@ -15,6 +15,9 @@ Este trecho é executado apenas na instalação
 * flask db init
 * flask db migrate
 * flask db upgrade
+* flask setup
+
+Após tudo configurado, usar o seguinte comando para iniciar o servidor da aplicação
 * flask run
 
 * abrir no navegador a url http://localhost:5000
