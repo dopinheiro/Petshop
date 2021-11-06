@@ -1,10 +1,12 @@
 {% extends "base.html" %}
-
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/addpet.css') }}">
+{% endblock %}
 {% block content %}
 
 <main>
     <div class="container-form">
-        <form action="post">
+        <form action="/add-pet" method="POST">
 
             <h2>Adicionar pet</h2>
 
@@ -12,31 +14,31 @@
                 <label class="label">
                   <input type="file" />
                   <figure class="pet-figure">
-                    <img src="../image/addpet.png" class="pet-avatar" alt="avatar">
+                    <img src="/static/image/addpet.png" class="pet-avatar" alt="avatar">
                     <figcaption class="pet-figcaption">
-                      <img src="../image/camera-white.png">
+                      <img src="/static//image/camera-white.png">
                     </figcaption>
                   </figure>
                 </label>
             </div>
-
+            <input type="hidden" name="proprietary" value="{{ current_user.id }}" hidden>
             <div class="campo">
-                <label for="">Nome</label> <br>
-                <input type="text" class="common-input" name="name-pet" placeholder="Insira o nome do seu pet" id="name-pet" required>
+                <label for="name">Nome</label> <br>
+                <input type="text" class="common-input" name="name" placeholder="Insira o nome do seu pet" id="name-pet" required>
             </div>
 
             <div class="campo">  
-                <label for="especie">Espécie </label>
-                <select class="common-input" name="especie" id="especie">
+                <label for="specie">Espécie </label>
+                <select class="common-input" name="specie" id="especie">
                     <option value="selecionar" aria-checked="true">Selecionar</option>
-                    <option value="cachorro">Cachorro</option>
-                    <option value="gato">Gato</option>
+                    <option value="1">Cachorro</option>
+                    <option value="2">Gato</option>
                 </select>
             </div>
 
             <div class="campo">
                 <label for="" class="checkbox">Data de nascimento</label> <br>
-                <input type="date" id="date" class="common-input" required>
+                <input type="date" id="date" name="birth"class="common-input" required>
             </div>
 
             <div class="campo"> 

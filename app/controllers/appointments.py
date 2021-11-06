@@ -18,11 +18,11 @@ def add_appointment():
     if request.method == 'POST':
         full_date = f"{request.form['date']} {request.form['horario']}"
         date = datetime.strptime(full_date, '%Y-%m-%d %H:%M')
-        # pet_id = request.form['pet']  # TODO: Precisa inserir no formulário
+        pet_id = request.form['pet']  # TODO: Precisa inserir no formulário
         services = []
         note = request.form['note']
         
-        new_appointment = Appointment(date, 1, obs=note)
+        new_appointment = Appointment(date, pet_id, obs=note)
         db.session.add(new_appointment)
         db.session.flush()
 
@@ -35,7 +35,9 @@ def add_appointment():
         db.session.commit()
         return 'Serviço adicionado com sucesso'
     services = Service.query.all()
-    return render_template('addagendamento.html', services=services)
+    print()
+    pets = Pet.query.filter_by(proprietary_id=current_user.role_id).all()
+    return render_template('addagendamento.html', services=services, pets=pets)
 
 
 @app.route('/get-appointments', methods=['GET', 'POST'])

@@ -1,8 +1,20 @@
-.check {
-    margin-bottom: 1em;
-    margin-top: 2px;  
+.date-time {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
 }
 
+.select-pet {
+    padding: 2px;
+    background-color: white;
+    border: 1px solid rgb(158, 157, 157);
+    border-radius: 5px;
+}
+.campo {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5em;
+}
 
 .check-servico {
     color: #4A403A;
@@ -13,6 +25,7 @@
     padding-left: 1em;
     height: 60px;
     margin-bottom: 1em;
+    width: 100%;
 }
 
 .agendar {

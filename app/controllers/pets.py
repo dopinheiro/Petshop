@@ -18,11 +18,12 @@ def add_pet():
         specie = request.form['specie']
         proprietary = request.form['proprietary']
         birth = request.form['birth']
-        note = request.form['note']
+        formated_birth = datetime.strptime(birth, '%Y-%m-%d')
+        note = request.form['note'] if 'note' in request.form else None
         
         is_register = len(Pet.query.filter_by(name=name).all())
         if not is_register:
-            new_pet = Pet(name, specie, proprietary, birth, note)
+            new_pet = Pet(name, specie, proprietary, formated_birth, note)
             db.session.add(new_pet)
             db.session.commit()
             return 'Pet adicionado com sucesso'
