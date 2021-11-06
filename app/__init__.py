@@ -1,4 +1,5 @@
 import click
+from datetime import datetime
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -37,18 +38,29 @@ def load_user(user_id):
 
 @app.cli.command('setup')
 def setup():
-    db.session.add( role.Role('admin') )
-    db.session.add( role.Role('client') )
-
-    db.session.add ( specie.Specie('cachorro') )
-    db.session.add ( specie.Specie('gato') )
     print('A seguir, insira os dados do usuário admin')
     name = input('Nome: ')
     email = input('Email: ')
     password = input('Senha: ')
     phone = input('Telefone: ')
 
-    admin = user.User(name, email, password, phone, 1)
-    db.session.add(admin)
-
-    db.session.commit()
+    if len(user.User.query.all())==0 and len(service.Service.query.all())==0:
+        queries = [
+            role.Role('admin'),
+            role.Role('client'),
+            user.User(name, email, password, phone, 1),
+            user.User('Milena Oliveira', 'milemoliveira@gmail.com', '123456', '11959258414', 2),
+            specie.Specie('Cachorro'),
+            specie.Specie('Gato'),
+            pet.Pet('Maya', 1, 2, datetime.now() ,None),
+            pet.Pet('Steve', 2, 2, datetime.now() ,None),
+            service.Service('Banho', 30, 60, 'banho'),
+            service.Service('Tosa', 30, 60, 'tosa'),
+            service.Service('Corte de unhas', 30, 60, 'corte'),
+            service.Service('Hidratação', 30, 60, 'hidratacao'),
+            service.Service('Penteado', 30, 60, 'penteados'),
+            service.Service('Escovação dos dentes ', 30, 60, 'escovacao'),
+        ]
+        for query in queries:
+            db.session.add(query)
+        db.session.commit()
