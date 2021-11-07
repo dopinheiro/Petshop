@@ -1,15 +1,12 @@
 from datetime import datetime
 
 from app import app,db
-from flask import render_template,request, flash, redirect, url_for
-from app.models.user import User
+from flask import render_template,request
 from app.models.pet import Pet
-from app.models.specie import Specie
 from app.models.service import Service
 from app.models.appointment import Appointment
 from app.models.appointment_service import AppointmentSevice
-from flask_login import login_user, login_required, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_required, current_user
 
 
 @app.route('/appointments', methods=['GET', 'POST'])
