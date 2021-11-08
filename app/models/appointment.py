@@ -11,8 +11,8 @@ class Appointment(db.Model):
     note = db.Column(db.Text)
     services = db.relationship('Service', secondary='appointments_services', backref='appointments')
     
-    def __init__(self, date, pet, finished_at=None, obs=None):
+    def __init__(self, date, pet, finished_at=None, note=None):
         self.date = date
         self.pet_id = pet
         self.finished_at = finished_at
-        self.obs = obs
+        self.note = note

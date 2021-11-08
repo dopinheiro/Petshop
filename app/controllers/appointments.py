@@ -15,11 +15,11 @@ def add_appointment():
     if request.method == 'POST':
         full_date = f"{request.form['date']} {request.form['horario']}"
         date = datetime.strptime(full_date, '%Y-%m-%d %H:%M')
-        pet_id = request.form['pet']  # TODO: Precisa inserir no formulário
+        pet_id = request.form['pet']
         services = []
         note = request.form['note']
         
-        new_appointment = Appointment(date, pet_id, obs=note)
+        new_appointment = Appointment(date, pet_id, note=note)
         db.session.add(new_appointment)
         db.session.flush()
 
