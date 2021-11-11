@@ -31,16 +31,22 @@
             <nav>
                 <ul>
                     <li><a href="/">Início</a></li>
-                    <li><a href="/services">Serviços</a></li>
+                    <li><a href="{{ url_for('get_services') }}">Serviços</a></li>
                     <li><a href="/appointments">Agenda</a></li>
-                    <li><a href="#">Pets</a></li>
+                    <li><a href="{{ url_for('add_pet')}}">Pets</a></li>
                     <li><a href="#">Contato</a></li>
                 </ul>
             </nav>
                 
             <div class="auth">
+            {% if current_user.is_authenticated %}
+                <img src="{{ url_for('static', filename='image/user.png') }}">
+                <span id="user-name">{{ current_user.name }}</span></a>
+            {% else %}
                 <a href="/register"><span id="signin">Cadastre-se</span></a>
-                <button type="button" id="login"> <i class="fas fa-sign-in-alt"></i>ENTRAR </button>
+                <button type="button" id="login" onclick="location.href = '/login';" > <i class="fas fa-sign-in-alt"></i>ENTRAR </button>
+            {% endif %}
+
             </div>
 
         </div>
