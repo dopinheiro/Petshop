@@ -1,10 +1,13 @@
+Python versão 3+
+
 Instalação:
 Linux
 * python3 -m venv env
 * source env/bin/activate
 * source .env
 
-Windows (Powershell):
+Windows (Necessário usar o Powershell):
+* Instalar o sqlite a partir do link https://www.sqlite.org/download.html
 * python -m venv env
 * env/Scripts/Activate.ps1
 * ./env.ps1
@@ -21,3 +24,6 @@ Após tudo configurado, usar o seguinte comando para iniciar o servidor da aplic
 * flask run
 
 * abrir no navegador a url http://localhost:5000
+
+Caso use o Visual Studio Code, é possível instalar a seguinte extensão para visualizar as tabelas no sqlite
+https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-mysql-client2
