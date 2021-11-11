@@ -1,7 +1,7 @@
 from app import db
 
-class Species(db.Model):
-    __tablename__ = 'species'
+class Status(db.Model):
+    __tablename__ = 'status'
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String)

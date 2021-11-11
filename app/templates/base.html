@@ -31,9 +31,9 @@
             <nav>
                 <ul>
                     <li><a href="/">Início</a></li>
-                    <li><a href="/services">Serviços</a></li>
+                    <li><a href="{{ url_for('get_services') }}">Serviços</a></li>
                     <li><a href="/appointments">Agenda</a></li>
-                    <li><a href="#">Pets</a></li>
+                    <li><a href="{{ url_for('add_pet')}}">Pets</a></li>
                     <li><a href="#">Contato</a></li>
                 </ul>
             </nav>

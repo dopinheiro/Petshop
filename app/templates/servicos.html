@@ -16,8 +16,12 @@
     {% endfor %}
 </ul>
 <div class="botoes">
-    <button class="agendamentos" type="submit" onsubmit="">Meus agendamentos <i class="far fa-calendar-alt"></i></button>   
+    <button class="agendamentos" type="submit" onsubmit="">Agendamentos <i class="far fa-calendar-alt"></i></button>
+{% if current_user.role_id==1 %}
+    <button class="agendamentos" type="submit" onclick="location.href = '/add-service';"> Adicionar serviço <i class="fas fa-plus"></i></button>  
+{% else %}
     <button class="agendamentos" type="submit" onclick="location.href = '/appointments';"> Novo agendamento <i class="fas fa-plus"></i></button>  
+{% endif %}
 </div>
 
 {% endblock %}

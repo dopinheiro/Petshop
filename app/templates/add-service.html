@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/addpet.css') }}">
+{% endblock %}
+{% block content %}
+{% with messages =  get_flashed_messages(with_categories=true) %}
+oi
+    {% if messages %}
+    {% for category, message in messages %}
+        {% if category == 'error' %}
+        <div class="alert alert-dismissible alert-danger">
+        {% elif category == 'warning' %}
+        <div class="alert alert-dismissible alert-warning">
+        {% elif category == 'success' %}
+        <div class="alert alert-dismissible alert-success">
+        {% else %}
+        <div class="alert alert-dismissible alert-primary">
+        {% endif %}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endwith %}
+<main>
+    <div class="container-form">
+        <form action="/add-service" method="POST">
+
+            <h2>Adicionar Serviço</h2>
+
+            <div class="pet-image">
+                <label class="label">
+                  <input type="file" />
+                  <figure class="pet-figure">
+                    <img src="/static/image/service_icon.png" class="pet-avatar" alt="avatar">
+                    <figcaption class="pet-figcaption">
+                      <img src="/static//image/camera-white.png">
+                    </figcaption>
+                  </figure>
+                </label>
+            </div>
+            <div class="campo">
+                <label for="name">Nome</label> <br>
+                <input type="text" class="common-input" name="name" placeholder="Qual o nome do serviço" id="name-pet" required>
+            </div>
+            <div class="campo">
+                <label for="duration">Duração</label> <br>
+                <input type="number" step="10.0" class="common-input" name="duration" placeholder="Quantos minutos de duração?" id="name-pet" required>
+            </div>
+            <div class="campo">
+                <label for="price">Preço</label> <br>
+                <input type="number" step="5.0" class="common-input" name="price" placeholder="Quanto custa o serviço?" id="name-pet" required>
+            </div>
+            <div class="campo">
+                <label for="name">Icone</label> <br>
+                <input type="text" class="common-input" name="icon" placeholder="Qual o nome do ícone" id="name-pet" required>
+            </div>
+            <button class="common-button" type="submit" onsubmit="">Adicionar serviço</button>    
+
+        </form>
+    </div>
+</main>
+
+{% endblock %}
