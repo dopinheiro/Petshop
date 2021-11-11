@@ -40,7 +40,7 @@ def load_user(user_id):
 @app.cli.command('setup')
 def setup():
     """
-    Para configurar o sistema, rodar: flask db config
+    Para configurar o sistema, rodar: flask db setup
     """
     print('A seguir, insira os dados do usuário admin')
     name = input('Nome: ')
