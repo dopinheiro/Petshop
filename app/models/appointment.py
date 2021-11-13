@@ -11,6 +11,7 @@ class Appointment(db.Model):
     note = db.Column(db.Text)
     status_id = db.Column(db.Integer, db.ForeignKey('status.id'))
     status = db.relationship('Status', foreign_keys=status_id)
+
     services = db.relationship('Service', secondary='appointments_services', backref='appointments')
     
     def __init__(self, date, pet, note=None):
