@@ -9,7 +9,9 @@ from app.models.appointment_service import AppointmentSevice
 from flask_login import login_required, current_user
 
 
-@app.route('/appointments', methods=['GET', 'POST'])
+
+
+@app.route('/add-appointments', methods=['GET', 'POST'])
 @login_required
 def add_appointment():
     if request.method == 'POST':
@@ -37,13 +39,14 @@ def add_appointment():
     return render_template('addagendamento.html', services=services, pets=pets)
 
 
-@app.route('/get-appointments', methods=['GET', 'POST'])
+@app.route('/appointments', methods=['GET', 'POST'])
 @login_required
 def get_appointments():
-    appointment_id = request.args.get('id')
-    appointment = Appointment.query.filter_by(id=appointment_id).first()
-    if appointment:
-        services = [ service.name for service in appointment.services]
-        return f'''O agendamento possui os seguintes serviços: {str(services).replace("[", "").replace("]", "").replace("'", "")}'''
-    else:
-        return 'Nenhum dado encontrado'
+    return render_template('agendamentos.html')
+    # appointment_id = request.args.get('id')
+    # appointment = Appointment.query.filter_by(id=appointment_id).first()
+    # if appointment:
+    #     services = [ service.name for service in appointment.services]
+    #     return f'''O agendamento possui os seguintes serviços: {str(services).replace("[", "").replace("]", "").replace("'", "")}'''
+    # else:
+    #     return 'Nenhum dado encontrado'
