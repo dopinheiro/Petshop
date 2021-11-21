@@ -22,6 +22,7 @@ from app.controllers import default, \
                             appointments, \
                             api
 
+
 # Este trecho inicia as models
 # ( importação realizada neste ponto pois precisa da instância de "app" instanciada )
 from app.models import role
