@@ -11,22 +11,34 @@ from flask_login import login_required, current_user
 
 
 @app.route('/api/add-appointment', methods=['POST'])
-def api_add_appointment():
-    full_date = f"{request.form['date'].replace('00:00:00.000', '')} {request.form['time'].replace('TimeOfDay(', '').replace(')','')}"
-    print(full_date)
+@app.route('/api/edit-appointment/<int:id>', methods=['PUT'])
+def api_add_appointment(id=None):
+
+    full_date = request.form['date']
     date = datetime.strptime(full_date, '%Y-%m-%d %H:%M')
     print(date)
     pet_id = request.form['pet']
     note = request.form['note']
     
-    new_appointment = Appointment(date, pet_id, note=note)
-    db.session.add(new_appointment)
+    if request.method == 'PUT':
+        appointment = Appointment.query.filter_by(id=id).one_or_none()
+        appointment.date = date
+        appointment.pet_id = pet_id
+        appointment.note = note
+
+        appointments_services = AppointmentSevice.query.filter_by(appointment_id=id).all()
+        for appointment_service in appointments_services:
+            db.session.delete(appointment_service)
+    else:
+        appointment = Appointment(date, pet_id, note=note)
+    db.session.add(appointment)
     db.session.flush()
 
+
+
     for service in literal_eval(request.form['service']):
-        service = service
-        new_appointment_service = AppointmentSevice(new_appointment.id, service)
-        db.session.add(new_appointment_service)
+        appointment_service = AppointmentSevice(appointment.id, service)
+        db.session.add(appointment_service)
             
     db.session.commit()
     return jsonify(msg='Agendamento realizado com sucesso'), 200
@@ -36,12 +48,12 @@ def api_add_appointment():
 def api_get_appointments(id=None):
     if id==None:
         appointments = Appointment.query.all()
-        print(appointments)
-        all_appointments = {}
+        all_appointments = []
         if appointments:
             for appointment in appointments:
-                all_appointments[appointment.id] = {
-                    'date': appointment.date,
+                all_appointments.append({
+                    'id': appointment.id,
+                    'date': str(appointment.date),
                     'pet': {
                         'id': appointment.pet.id,
                         'name': appointment.pet.name,
@@ -51,21 +63,22 @@ def api_get_appointments(id=None):
                     'note': appointment.note,
                     'finished_at': appointment.finished_at,
                     'status': appointment.status.description
-                }
-            return jsonify(all_appointments), 200
+                })
+            return jsonify({'appointments': all_appointments}), 200
     elif id!=None:
         appointment = Appointment.query.filter_by(id=id).first()
         if appointment:
-            services = [ service.name for service in appointment.services]
+            services = [ {'id': service.id, 'name':service.name} for service in appointment.services]
             services_json = {
                 'id': appointment.id,
-                'date': appointment.date,
+                'date': str(appointment.date),
                 'pet': {
                     'id': appointment.pet.id,
                     'name': appointment.pet.name,
                     'specie': appointment.pet.species.description,
                     'proprietary': appointment.pet.proprietary.name
                 },
+                'services': services,
                 'note': appointment.note,
                 'finished_at': appointment.finished_at,
                 'status': appointment.status.description
