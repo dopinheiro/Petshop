@@ -19,7 +19,8 @@ from app.controllers import default, \
                             users, \
                             pets, \
                             services, \
-                            appointments
+                            appointments, \
+                            api
 
 # Este trecho inicia as models
 # ( importação realizada neste ponto pois precisa da instância de "app" instanciada )
