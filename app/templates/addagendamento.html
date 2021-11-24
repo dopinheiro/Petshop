@@ -6,24 +6,24 @@
 
 {% block content %}
     <div class="container-form">
-        <form action="/add-appointments" method="POST">
+        <form action="{% if appointment %}/edit-appointment/{{appointment.id}}{% else %}/add-appointments{% endif %}" method="POST">
 
             <h2>Agendamento</h2>
             <div class="date-time">
                 <div class="campo">
                     <label for="date" class="checkbox">Data</label>
-                    <input type="date" name="date" class="data-hora" required >
+                    <input type="date" name="date" id="date" class="data-hora" required >
                 </div>
                 <div class="campo">
                     <label for="horario">Horário</label>
-                    <input type="time" name="horario" class="data-hora" required>
+                    <input type="time" name="horario" id="date" class="data-hora" required>
                 </div>
             </div>
             <div class="campo">
                 <label for="pet">Pet</label> <br>
                 <select class="select-pet" name="pet">
                     {% for pet in pets %}
-                    <option value="{{ pet.id }}">{{pet.name}}</option>
+                    <option value="{{ pet.id }}" {% if appointment %} selected {% endif %}>{{pet.name}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -32,15 +32,31 @@
                 </label> <br>
                 {% for service in services %}
                 <label for="service" class="check-servico"> 
-                    <input type="checkbox" name="service-{{service.id}}" value="{{ service.id }}"> {{ service.name }}
+                    <input type="checkbox" name="service-{{service.id}}" id="service-{{service.id}}" value="{{ service.id }}"> {{ service.name }}
                 </label><br>
                 {% endfor %}
             </div>
             <div class="campo">
                 <label for="">Observação</label> <br>
-                <input type="text" name="note" class="observacao" placeholder="Insira sua observacao" equired>
+                <input type="text" id="note" name="note" class="observacao" placeholder="Insira sua observacao" equired>
             </div>
-            <button class="agendar" type="submit" onsubmit="">AGENDAR</button>    
+            <button class="agendar" type="submit" onsubmit="">{% if appointment %} REMARCAR {% else %} AGENDAR {% endif %}</button>    
         </form>
     </div>
+    {% if appointment %}
+        <script>
+            let timestamp = Date.parse("{{ appointment.date }}") - 10800000;
+            let appointmentDatetime = new Date(timestamp*1000);
+            let date = new Date;
+            let hour = date.toISOString().substring(11,16);
+            document.getElementsByName("date").valueOf()[0].valueAsNumber = timestamp;
+            document.getElementsByName("horario").valueOf()[0].valueAsNumber=timestamp;
+            
+            {% for service in appointment.services %}
+            document.getElementById("service-{{service.id}}").checked = true;
+            {% endfor %}
+        
+            document.getElementById("note").value = "{{appointment.note}}";
+        </script>
+    {% endif %}
 {% endblock %}
