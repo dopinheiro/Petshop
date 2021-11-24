@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container-form" style="flex-direction: column;">
     <div class="cards">
-        <h2>Meus Agendamentos</h2>
+        <h2>Agendamentos</h2>
         {% for appointment in appointments %}
         <div class="card">
             <div class="specie-icon">
@@ -27,7 +27,7 @@
                     <span class="status {{appointment.status.description}}">{{appointment.status.description}}</span>
                     <div class="actions">
                         <div class="delete-appointment">
-                            <a href="/del-appointment/{{ appointment.id }}" onclick="return confirm('Você tem certeza que gostaria de deletar este agendamento?');">
+                            <a href="/del-appointment/{{ appointment.id }}" onclick="return confirm('Você tem certeza que gostaria de {% if current_user.id==1 %}cancelar{% else %}deletar{% endif %} este agendamento?');">
                                 <i class="fa fa-trash-alt" aria-hidden="true"></i>
                             </a>
                         </div>

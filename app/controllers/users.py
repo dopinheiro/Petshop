@@ -1,7 +1,7 @@
 from app import app,db
 from flask import render_template,request, flash, redirect, url_for
 from app.models.user import User
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -35,7 +35,10 @@ def login():
         if user and check_password_hash(user.password,password):
             login_user(user)
             flash('Você está logado', 'success')
-            return redirect(url_for('add_appointment'))
+            if current_user.id == 1:
+                return redirect(url_for('get_appointments'))
+            else:
+                return redirect(url_for('add_appointment'))
     return render_template('login.html')
 
 @app.route("/logout")
