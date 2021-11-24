@@ -1,0 +1,105 @@
+.cards {
+    color: #4A403A;
+    padding: 1em;
+    width: 480px;
+    height: 80%;
+    background: #FFFFFF;
+    border: 1px solid #A45D5D;
+    border-radius: 5px;
+  }
+
+.card {
+    background: #FFC069;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-end;
+    color: rgba(85, 66, 61, 0.8);
+}
+
+.card + .card{
+    margin-top: 15px;
+}
+
+.card a {
+    color: #4A403A;
+}
+
+.card-content {
+    background: #EFEFEF;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 80%;
+    padding: 1em;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+}
+
+.row + .row {
+    margin-top: 15px;
+}
+
+.actions {
+    width: 20px;
+}
+
+.specie-icon {
+    font-size: 3em;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#pet-name{
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.agendamentos {
+	margin: 3.3em;
+    width: 15em;
+    height: 2.5em;
+    color:#EFEFEF;
+    font-weight: bold;
+    background: #A45D5D;
+    border-radius: 5px;
+    border: none;
+}
+
+.agendamentos:hover {
+	background-color: #b67575;
+    color: #ffffff;
+}
+
+.agendamentos i {
+	padding-left: 0.5em;
+	font-size: 1em;
+}
+
+.status {
+    color: white;
+    font-size: 0.75em;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.Finalizado {
+    background: #19a337;
+}
+
+.Agendado {
+    background: #0d6efd;
+}
+
+.Cancelado {
+    background: #b67575;
+}

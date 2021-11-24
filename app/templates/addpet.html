@@ -6,7 +6,7 @@
 
 <main>
     <div class="container-form">
-        <form action="/add-pet" method="POST">
+        <form action="{% if pet %}/edit-pet/{{pet.id}} {% else %}/add-pet {% endif %}" method="POST">
 
             <h2>Adicionar pet</h2>
 
@@ -21,7 +21,6 @@
                   </figure>
                 </label>
             </div>
-            <input type="hidden" name="proprietary" value="{{ current_user.id }}" hidden>
             <div class="campo">
                 <label for="name">Nome</label> <br>
                 <input type="text" class="common-input" name="name" placeholder="Insira o nome do seu pet" id="name-pet" required>
@@ -31,8 +30,8 @@
                 <label for="specie">Espécie </label>
                 <select class="common-input" name="specie" id="especie">
                     <option value="selecionar" aria-checked="true">Selecionar</option>
-                    <option value="1">Cachorro</option>
-                    <option value="2">Gato</option>
+                    <option value="1" {% if pet.species_id==1 %} selected {% endif %} >Cachorro</option>
+                    <option value="2" {% if pet.species_id==2 %} selected {% endif %} >Gato</option>
                 </select>
             </div>
 
@@ -58,11 +57,18 @@
             </div>
 
             
-            <button class="common-button" type="submit" onsubmit="">Adicionar pet</button>    
+            <button class="common-button" type="submit" onsubmit="">{% if pet %} Editar pet{% else %}Adicionar pet{%endif%}</button>    
             
 
         </form>
     </div>
 </main>
 
+{% if pet %}
+<script>
+    document.getElementById("name-pet").value="{{ pet.name }}";
+    let timestamp = Date.parse("{{ pet.birth }}");
+    document.getElementsByName("birth").valueOf()[0].valueAsNumber = timestamp;
+</script>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contato.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<h1>CENTRAL DE ATENDIMENTO AO CLIENTE</h1>
+
+<div class="container">
+    <p class="text-center">
+        <b>Horário de Atendimento</b>
+    </p>
+    <p class="hours text-center">
+        Segunda a Sexta: <b>08:00 - 18:00</b> <br>
+        Sábados: <b>08:00 - 14:00</b> 
+    </p>
+
+    <ul class="contato">
+        <li>
+            <img src="{{ url_for('static', filename='image/whatsapp.png') }}" alt="WhatsApp">
+            <p>(XX) X XXXX-XXXX</p>
+        </li>
+        <li>
+            <img src="{{ url_for('static', filename='image/local.png') }}" alt="WhatsApp">
+           <p>R. Nome, Nº, Bairro, Itatiba - SP</p> 
+        </li>
+        <li>
+            <img src="{{ url_for('static', filename='image/email.png') }}" alt="WhatsApp">
+            <p>suporte@petshop.com.br</p>
+        </li>
+    </ul>
+
+<div class="social-media">
+    <span>REDES SOCIAIS</span> <br>
+    <span>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-facebook"></a>
+        <a href="#" class="fab fa-whatsapp"></a>
+    </span>
+</div>
+    
+</div>
+
+
+{% endblock %}

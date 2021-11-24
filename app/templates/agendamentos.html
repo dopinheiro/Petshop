@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agendamentos.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-form" style="flex-direction: column;">
+    <div class="cards">
+        <h2>Agendamentos</h2>
+        {% for appointment in appointments %}
+        <div class="card">
+            <div class="specie-icon">
+                {% if appointment.pet.species_id==1 %}
+                <i class="fa fa-dog" aria-hidden="true"></i>
+                {% else %}
+                <i class="fa fa-cat" aria-hidden="true"></i>
+                {% endif %}
+                <div id="pet-name">{{ appointment.pet.name }}</div>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="date">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <span>{{ appointment.date.strftime('%d/%m/%Y') }}</span>
+                    </div>
+                    <span class="status {{appointment.status.description}}">{{appointment.status.description}}</span>
+                    <div class="actions">
+                        <div class="delete-appointment">
+                            <a href="/del-appointment/{{ appointment.id }}" onclick="return confirm('Você tem certeza que gostaria de {% if current_user.id==1 %}cancelar{% else %}deletar{% endif %} este agendamento?');">
+                                <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="date">
+                        <i class="fa fa-clock" aria-hidden="true"></i>
+                        <span>{{ appointment.date.strftime('%H:%M') }}</span>
+                    </div>
+                    <div class="actions">
+                        <div class="edit-appointment">
+                            <a href="/edit-appointment/{{ appointment.id }}" {% if current_user.id==1 %} onclick="return confirm('Você tem certeza que gostaria de finalizar este agendamento?');"{% endif %}>
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="botoes">
+    {% if current_user.role_id==2 %}
+        <button class="agendamentos" type="submit" onclick="location.href = '/add-appointments';"> Novo agendamento <i class="fas fa-plus"></i></button>  
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

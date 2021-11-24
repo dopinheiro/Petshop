@@ -13,3 +13,7 @@ from werkzeug.security import generate_password_hash
 @app.route('/')
 def index():
     return render_template('home.html')
+
+@app.route('/contato')
+def contact():
+    return render_template('contato.html')

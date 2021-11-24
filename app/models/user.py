@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     phone = db.Column(db.String)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     role = db.relationship('Role', foreign_keys=role_id)
+    pets = db.relationship('Pet', backref='pets')
 
     def __init__(self, name, email, password, phone, role):
         self.name = name

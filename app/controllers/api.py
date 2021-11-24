@@ -16,7 +16,6 @@ def api_add_appointment(id=None):
 
     full_date = request.form['date']
     date = datetime.strptime(full_date, '%Y-%m-%d %H:%M')
-    print(date)
     pet_id = request.form['pet']
     note = request.form['note']
     

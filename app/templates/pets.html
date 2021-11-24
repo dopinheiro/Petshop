@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agendamentos.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-form" style="flex-direction: column;">
+    <div class="cards">
+        <h2>Meus pets</h2>
+        {% for pet in pets %}
+        <div class="card">
+            <div class="specie-icon">
+                {% if pet.species_id==1 %}
+                <i class="fa fa-dog" aria-hidden="true"></i>
+                {% else %}
+                <i class="fa fa-cat" aria-hidden="true"></i>
+                {% endif %}
+                <div id="pet-name">{{ pet.name }}</div>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="date">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <span>{{ pet.birth.strftime('%d/%m/%Y') }}</span>
+                    </div>
+                    <div class="actions">
+                        <div class="delete-pet">
+                            <a href="/del-pet/{{ pet.id }}" onclick="return confirm('Você tem certeza que gostaria de deletar este pet?');">
+                                <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="date">
+                    </div>
+                    <div class="actions">
+                        <div class="edit-pet">
+                            <a href="/edit-pet/{{ pet.id }}">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="botoes">
+        <button class="agendamentos" type="submit" onclick="location.href = '/add-pet';"> Adicionar Pet <i class="fas fa-plus"></i></button>  
+    </div>
+</div>
+
+{% endblock %}

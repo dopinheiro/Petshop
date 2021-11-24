@@ -1,10 +1,11 @@
 main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5%;
 	flex-direction: column;
-}
+  }
+  
 .servicos {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
