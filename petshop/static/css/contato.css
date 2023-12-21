@@ -29,6 +29,11 @@ li img {
     margin-bottom: 1em;
 }
 
+.contato span {
+    font-size: 2em;
+    padding-bottom: 1em;
+}
+
 .social-media {
     font-weight: bold;
     color: #9C525D;
