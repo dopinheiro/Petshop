@@ -15,7 +15,7 @@ migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 
 
-from app.controllers import default, \
+from petshop.controllers import default, \
                             users, \
                             pets, \
                             services, \
@@ -24,15 +24,15 @@ from app.controllers import default, \
 
 
 # Este trecho inicia as models
-# ( importação realizada neste ponto pois precisa da instância de "app" instanciada )
-from app.models import role
-from app.models import user
-from app.models import service
-from app.models import specie
-from app.models import pet
-from app.models import status
-from app.models import appointment
-from app.models import appointment_service
+# ( importação realizada neste ponto pois precisa da instância de "petshop" instanciada )
+from petshop.models import role
+from petshop.models import user
+from petshop.models import service
+from petshop.models import specie
+from petshop.models import pet
+from petshop.models import status
+from petshop.models import appointment
+from petshop.models import appointment_service
 
 
 @login_manager.user_loader
@@ -60,7 +60,7 @@ def setup():
             specie.Specie('Gato'),
             status.Status('Agendado'),
             status.Status('Finalizado'),
-            status.Status('Cancelado'), 
+            status.Status('Cancelado'),
             pet.Pet('Maya', 1, 2, datetime.now() ,None),
             pet.Pet('Steve', 2, 2, datetime.now() ,None),
             service.Service('Banho', 30, 60, 'banho'),

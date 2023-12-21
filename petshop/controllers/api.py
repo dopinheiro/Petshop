@@ -1,12 +1,12 @@
 from datetime import datetime
 from ast import literal_eval
 
-from app import app,db
+from petshop.app import app,db
 from flask import request, jsonify
-from app.models.pet import Pet
-from app.models.service import Service
-from app.models.appointment import Appointment
-from app.models.appointment_service import AppointmentSevice
+from petshop.models.pet import Pet
+from petshop.models.service import Service
+from petshop.models.appointment import Appointment
+from petshop.models.appointment_service import AppointmentSevice
 from flask_login import login_required, current_user
 
 

@@ -6990,7 +6990,7 @@ figma:
   label: Figma
   search:
     terms:
-      - app
+      - petshop
       - design
       - interface
   styles:
@@ -10852,7 +10852,7 @@ intercom:
   label: Intercom
   search:
     terms:
-      - app
+      - petshop
       - customer
       - messenger
   styles:
@@ -10878,7 +10878,7 @@ invision:
   label: InVision
   search:
     terms:
-      - app
+      - petshop
       - design
       - interface
   styles:
@@ -15665,7 +15665,7 @@ rocket:
   search:
     terms:
       - aircraft
-      - app
+      - petshop
       - jet
       - launch
       - nasa
@@ -16707,7 +16707,7 @@ sketch:
   label: Sketch
   search:
     terms:
-      - app
+      - petshop
       - design
       - interface
   styles:

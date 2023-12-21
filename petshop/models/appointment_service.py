@@ -1,4 +1,4 @@
-from app import db
+from petshop.app import db
 
 class AppointmentSevice(db.Model):
     __tablename__ = 'appointments_services'

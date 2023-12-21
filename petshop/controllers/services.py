@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from app import app,db
+from petshop.app import app,db
 from flask import render_template,request, flash, redirect, url_for
-from app.models.service import Service
+from petshop.models.service import Service
 from flask_login import login_required, current_user
 
 @app.route('/services', methods=['GET', 'POST'])
