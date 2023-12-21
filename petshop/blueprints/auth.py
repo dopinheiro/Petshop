@@ -1,11 +1,16 @@
-from petshop.app import app,db
-from flask import render_template,request, flash, redirect, url_for
+from petshop.ext.database import db
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from petshop.models.user import User
 from flask_login import login_user, logout_user, login_required, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import  check_password_hash
+
+auth = Blueprint('auth', __name__,
+                  template_folder='templates',
+                  static_folder='static',
+                  url_prefix='')
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         name = request.form['name']
@@ -19,13 +24,13 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             flash('Usuário cadastrado com sucesso, você será redirecionado', 'success')
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         else:
             flash('Email de usuário já cadastrado', 'error')
     return render_template('cadastro.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -36,15 +41,16 @@ def login():
             login_user(user)
             flash('Você está logado', 'success')
             if current_user.id == 1:
-                return redirect(url_for('get_appointments'))
+                return redirect(url_for('appointments.get_appointments'))
             else:
-                return redirect(url_for('add_appointment'))
+                return redirect(url_for('appointments.add_appointment'))
+
+    flash('Erro ao logar', 'warning')
     return render_template('login.html')
 
-@app.route("/logout")
+
+@auth.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
-
-
+    return redirect(url_for('webui.index'))

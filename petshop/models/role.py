@@ -1,4 +1,4 @@
-from petshop.app import db
+from petshop.ext.database import db
 
 class Role(db.Model):
     __tablename__ = 'roles'

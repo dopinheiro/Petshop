@@ -1,5 +1,5 @@
 from sqlalchemy.orm import backref
-from petshop.app import db
+from petshop.ext.database import db
 
 class Pet(db.Model):
     __tablename__ = 'pets'

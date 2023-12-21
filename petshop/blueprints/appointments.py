@@ -1,15 +1,22 @@
 from datetime import datetime
 
-from petshop.app import app,db
-from flask import render_template,request, redirect, url_for
+from petshop.ext.database import db
+from flask import render_template, request, redirect, url_for
 from petshop.models.pet import Pet
 from petshop.models.service import Service
 from petshop.models.appointment import Appointment
 from petshop.models.appointment_service import AppointmentSevice
 from flask_login import login_required, current_user
-from flask import flash
+from flask import Blueprint, flash
 
-@app.route('/add-appointments', methods=['GET', 'POST'])
+
+appointments = Blueprint('appointments', __name__,
+                  template_folder='templates',
+                  static_folder='static',
+                  url_prefix='')
+
+
+@appointments.route('/add-appointments', methods=['GET', 'POST'])
 @login_required
 def add_appointment():
     if request.method == 'POST':
@@ -31,13 +38,13 @@ def add_appointment():
                 
         db.session.commit()
         flash('Agendamento realizado com sucesso', 'success')
-        return redirect(url_for('get_appointments'))
+        return redirect(url_for('appointments.get_appointments'))
     services = Service.query.all()
     pets = Pet.query.filter_by(proprietary_id=current_user.id).all()
     return render_template('addagendamento.html', services=services, pets=pets, appointment=None)
 
 
-@app.route('/appointments', methods=['GET', 'POST'])
+@appointments.route('/appointments', methods=['GET', 'POST'])
 @login_required
 def get_appointments():
     if current_user.role_id==1:
@@ -47,7 +54,7 @@ def get_appointments():
     return render_template('agendamentos.html', appointments=appointments)
 
 
-@app.route('/edit-appointment/<int:id>', methods=['GET', 'POST'])
+@appointments.route('/edit-appointment/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_appointments(id):
     if request.method == 'POST':
@@ -78,7 +85,7 @@ def edit_appointments(id):
                 
         db.session.commit()
         flash('Agendamento realizado com sucesso', 'success')
-        return redirect(url_for('get_appointments'))
+        return redirect(url_for('appointments.get_appointments'))
     
     appointment = Appointment.query.filter_by(id=id).one_or_none()
     if appointment:
@@ -88,7 +95,7 @@ def edit_appointments(id):
             db.session.add(appointment)
             db.session.commit()
             flash(f'Agendamento do/a {appointment.pet.name} foi finalizado', 'success')
-            return redirect(url_for('get_appointments'))
+            return redirect(url_for('appointments.get_appointments'))
         
         services = Service.query.all()
         services = Service.query.all()
@@ -96,9 +103,9 @@ def edit_appointments(id):
         return render_template('addagendamento.html', appointment=appointment, services=services, pets=pets)
     else:
         flash(f'Agendamento não encontrado...', 'warning')
-        return redirect(url_for('get_appointments'))
+        return redirect(url_for('appointments.get_appointments'))
 
-@app.route('/del-appointment/<int:id>')
+@appointments.route('/del-appointment/<int:id>')
 def del_appointments(id):
     appointment = Appointment.query.filter_by(id=id).one_or_none()
 
@@ -109,10 +116,10 @@ def del_appointments(id):
             db.session.add(appointment)
             db.session.commit()
             flash('Agendamento cancelado', 'warning')
-            return redirect(url_for('get_appointments'))
+            return redirect(url_for('appointments.get_appointments'))
             
         db.session.delete(appointment)
         db.session.commit()
 
     flash('Agendamento excluído', 'warning')
-    return redirect(url_for('get_appointments'))
+    return redirect(url_for('appointments.get_appointments'))

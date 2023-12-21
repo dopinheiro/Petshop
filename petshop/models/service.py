@@ -1,4 +1,5 @@
-from petshop.app import db
+from petshop.ext.database import db
+
 
 class Service(db.Model):
     __tablename__ = 'services'
